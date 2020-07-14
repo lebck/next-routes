@@ -1,6 +1,6 @@
 import pathToRegexp from 'path-to-regexp'
 import React from 'react'
-import {parse} from 'url'
+import {parse, URLSearchParams} from 'url'
 import NextLink from 'next/link'
 import NextRouter from 'next/router'
 
@@ -169,16 +169,20 @@ class Route {
   }
 }
 
-const toQuerystring = obj => Object.keys(obj)
-  .filter(key => obj[key] !== null && obj[key] !== undefined)
-  .map(key => {
-    let value = obj[key]
+const toQuerystring = obj => {
+  const params = new URLSearchParams()
 
-    if (Array.isArray(value)) {
-      value = value.join('/')
-    }
-    return [
-      encodeURIComponent(key),
-      encodeURIComponent(value)
-    ].join('=')
-  }).join('&')
+  Object.keys(obj).forEach(key => {
+    const value = obj[key]
+
+    if (value === undefined || value === null) return
+
+    const values = Array.isArray(value) ? value : [value]
+
+    values.forEach(value => {
+      params.append(key, value)
+    })
+  })
+
+  return params.toString()
+}
