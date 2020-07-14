@@ -290,7 +290,7 @@ function () {
 }();
 
 var toQuerystring = function toQuerystring(obj) {
-  var params = new _url.URLSearchParams();
+  var params = new URLSearchParams();
   Object.keys(obj).forEach(function (key) {
     var value = obj[key];
     if (value === undefined || value === null) return;

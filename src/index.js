@@ -1,6 +1,6 @@
 import pathToRegexp from 'path-to-regexp'
 import React from 'react'
-import {parse, URLSearchParams} from 'url'
+import {parse} from 'url'
 import NextLink from 'next/link'
 import NextRouter from 'next/router'
 
